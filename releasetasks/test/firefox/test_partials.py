@@ -20,6 +20,7 @@ class TestEnUSPartials(unittest.TestCase):
             bouncer_enabled=False,
             push_to_candidates_enabled=False,
             push_to_releases_enabled=False,
+            uptake_monitoring_enabled=False,
             postrelease_version_bump_enabled=False,
             postrelease_bouncer_aliases_enabled=False,
             en_US_config={"platforms": {
@@ -129,3 +130,16 @@ class TestEnUSPartials(unittest.TestCase):
                 self.assertEqual(
                     signing["task"]["payload"]["signingManifest"],
                     "https://queue.taskcluster.net/v1/task/%s/artifacts/public/env/manifest.json" % generator["taskId"])
+
+    def test_funsize_name(self):
+        for p in ("win32", "macosx64",):
+            for v in ("38.0build1", "37.0build2",):
+                generator = get_task_by_name(self.graph, "{}_en-US_{}_funsize_update_generator".format(p, v))
+                signing = get_task_by_name(self.graph, "{}_en-US_{}_funsize_signing_task".format(p, v))
+                balrog = get_task_by_name(self.graph, "{}_en-US_{}_funsize_balrog_task".format(p, v))
+                self.assertEquals(generator["task"]["metadata"]["name"],
+                                  "[funsize] Update generating task %s %s for %s" % (p, "en-US", v.split('build')[0],))
+                self.assertEquals(signing["task"]["metadata"]["name"],
+                                  "[funsize] MAR signing task %s %s for %s" % (p, "en-US", v.split('build')[0],))
+                self.assertEquals(balrog["task"]["metadata"]["name"],
+                                  "[funsize] Publish to Balrog %s %s for %s" % (p, "en-US", v.split('build')[0],))
