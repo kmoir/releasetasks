@@ -77,9 +77,9 @@
                 collection:
                     opt: true
                 machine:
-                    platform: linux64
+                    platform: android-4-0-armv7-api15
                 build:
-                    platform: linux64
+                    platform: android-4-0-armv7-api15
             {{ task_notifications("{} source generation".format(branch), completed=["releasetasks"], failed=["releasetasks"], exception=["releasetasks"]) | indent(12) }}
 
 -
@@ -124,9 +124,9 @@
                 collection:
                     opt: true
                 machine:
-                    platform: linux64
+                    platform: android-4-0-armv7-api15
                 build:
-                    platform: linux64
+                    platform: android-4-0-armv7-api15
             {{ task_notifications("{} source signing".format(branch), completed=["releasetasks"], failed=["releasetasks"], exception=["releasetasks"]) | indent(12) }}
 
 -
@@ -188,9 +188,9 @@
                 collection:
                     opt: true
                 machine:
-                    platform: linux64
+                    platform: android-4-0-armv7-api15
                 build:
-                    platform: linux64
+                    platform: android-4-0-armv7-api15
             {{ task_notifications("[beetmover] {} {} move source bundles".format(product, branch), completed=["releasetasks"], failed=["releasetasks"], exception=["releasetasks"]) | indent(12) }}
 
 -
@@ -250,7 +250,7 @@
                 collection:
                     opt: true
                 machine:
-                    platform: linux64
+                    platform: android-4-0-armv7-api15
                 build:
-                    platform: linux64
+                    platform: android-4-0-armv7-api15
             {{ task_notifications("[beetmover] {} {} move source bundle checksums".format(product, branch), completed=["releasetasks"], failed=["releasetasks"], exception=["releasetasks"]) | indent(12) }}
