@@ -1,3 +1,4 @@
+{% set buildername = "release-{}-{}_decision_task".format(branch, product) %}
 -
     taskId: "{{ stableSlugId(buildername) }}"
     reruns: 5
@@ -14,7 +15,7 @@
              - docker-worker:cache:level-3-*
              - docker-worker:cache:tooltool-cache
              - scheduler:extend-task-graph:*
-             - assume:hook-id:project-releng/candidates-fennec-dev,
+             - assume:hook-id:project-releng/candidates-fennec-dev
              - queue:create-task:scriptworker-prov-v1/beetmoverworker-v1
              - queue:create-task:scriptworker-prov-v1/balrogworker-v1
         payload:
@@ -38,7 +39,12 @@
                 - /bin/bash
                 - -cx
                 - >
-                cd /home/worker/checkouts/gecko && ln -s /home/worker/artifacts artifacts && ./mach --log-no-times 'taskgraph decision' --pushlog-id 0 --pushdate 0 --project {{ branch }}  --message 'try: -b o -p foo -u none -t none' --owner asasaki@mozilla.com --level 3 --base-repository $GECKO_BASE_REPOSITORY --head-repository $GECKO_HEAD_REPOSITORY --head-ref $GECKO_HEAD_REF --head-rev $GECKO_HEAD_REV --triggered-by nightly --target-tasks-method candidates_fennec
+                  cd /home/worker/checkouts/gecko && ln -s /home/worker/artifacts artifacts &&
+                  ./mach --log-no-times 'taskgraph decision' --pushlog-id 0 --pushdate 0 --project
+                  {{ branch }}  --message 'try: -b o -p foo -u none -t none' --owner
+                  asasaki@mozilla.com --level 3 --base-repository $GECKO_BASE_REPOSITORY
+                  --head-repository $GECKO_HEAD_REPOSITORY --head-ref $GECKO_HEAD_REF --head-rev
+                  $GECKO_HEAD_REV --triggered-by nightly --target-tasks-method candidates_fennec
             artifacts:
                 public:
                     type: directory
