@@ -20,16 +20,16 @@ updates_enabled: false
 checksums_enabled: false
 push_to_candidates_enabled: false
 update_verify_enabled: false
-push_to_releases_enabled: true
+push_to_releases_enabled: false
 # rc graph 2 only needs final_verify_channels
 channels:
 publish_to_balrog_channels: []
 final_verify_channels:
     - "release"
-postrelease_bouncer_aliases_enabled: true
-uptake_monitoring_enabled: true
-postrelease_version_bump_enabled: true
-postrelease_mark_as_shipped_enabled: true
+postrelease_bouncer_aliases_enabled: false
+uptake_monitoring_enabled: false
+postrelease_version_bump_enabled: false
+postrelease_mark_as_shipped_enabled: false
 
 product: "fennec"
 stage_product: "mobile"
